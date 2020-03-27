@@ -10,6 +10,13 @@
     <img th:src="@{/images/Tacodesign.jpg}"/>
 
     <form method="POST" th:object="${design}">
+    
+    <div th:if="${#fields.hasErrors()}">
+        <span class="validationError">
+        Please correct the problems below and resubmit.
+        </span>
+      </div>
+      
     <div class="grid">
       <div class="ingredients" id="wraps">
       <h3>Designate your wrap:</h3>
@@ -59,7 +66,10 @@
 
 
       <h3>Name your taco creation:</h3>
-      <input type="text" th:field="*{name}"/>
+      <input type="text" th:field="*{name}" required/>
+      <span class="validationError"
+      th:if="${#fields.hasErrors('name')}"
+      th:errors="*{name}">please provide a name*</span>
       <br/>
 
       <button>Submit your taco</button>
