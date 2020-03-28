@@ -22,29 +22,31 @@ public class JDBCIngredientRepo
 
 @Override
 public Iterable<Ingredients> findAll() {
-	// TODO Auto-generated method stub
-	return jdbc.query("select id, name,type from Ingredients", this::mapRowToIngredient);
+	// query() returns a list of objects
+	return jdbc.query("select id, name,type from Ingredient", this::mapRowToIngredient);
 }
 
 
 @Override
 public Ingredients findOne(String id) {
-	// TODO Auto-generated method stub
-	return jdbc.queryForObject("select id, name,type from Ingredients where id=?", this::mapRowToIngredient, id);
+	// queryForObject() returns a single object
+	return jdbc.queryForObject("select id, name,type from Ingredient where id=?", this::mapRowToIngredient, id);
 }
 
 
+//inserting a row
 @Override
 public Ingredients save(Ingredients ingredient) {
 	// TODO Auto-generated method stub
-	 jdbc.update("Insert into Ingredients(id,name,type) values(?,?,?)",
+	 jdbc.update("Insert into Ingredient(id,name,type) values(?,?,?)",
 			 ingredient.getId(),
 			 ingredient.getName(),
 			 ingredient.getType().toString());
 	 return ingredient;
 	
 }
-
+//rowmapper to map each row in the resultset
+//to a taco object
 private Ingredients mapRowToIngredient(ResultSet rs, int rowNum)
 	    throws SQLException {
 	  return new Ingredients(
