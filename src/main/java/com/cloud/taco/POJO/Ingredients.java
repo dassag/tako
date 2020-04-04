@@ -1,4 +1,4 @@
-package com.cloud.taco;
+package com.cloud.taco.POJO;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

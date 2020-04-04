@@ -1,4 +1,5 @@
-package com.cloud.taco;
+package com.cloud.taco.JDBCRepository;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -6,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+
+import com.cloud.taco.POJO.Ingredients;
+import com.cloud.taco.Repository.IngredientRepository;
 
 @Repository
 public class JDBCIngredientRepo
@@ -30,7 +34,8 @@ public Iterable<Ingredients> findAll() {
 @Override
 public Ingredients findOne(String id) {
 	// queryForObject() returns a single object
-	return jdbc.queryForObject("select id, name,type from Ingredient where id=?", this::mapRowToIngredient, id);
+	return jdbc.queryForObject("select id, name,type from Ingredient where id=?", 
+			this::mapRowToIngredient, id);
 }
 
 

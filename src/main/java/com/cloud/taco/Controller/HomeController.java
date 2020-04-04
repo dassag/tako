@@ -1,4 +1,4 @@
-package com.cloud.taco;
+package com.cloud.taco.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +16,12 @@ public class HomeController {
 	public String home()
 	{
 		return "home"; //interpreted as the logical view name which is home.html here
+	}
+	
+	@GetMapping
+	public String design()
+	{
+		return "design";
 	}
 	
 
