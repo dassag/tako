@@ -37,8 +37,35 @@ public class JdbcOrderRepository implements OrderRepository {
 
 @Override
 public Order save(Order order) {
-	// TODO Auto-generated method stub
-	return null;
+  order.setCreatedAt(new Date());
+  long orderId = saveOrderDetails(order);
+  order.setId(orderId);
+  List<Taco> tacolist = order.getTaco();
+  for (Taco taco : tacolist) {
+    saveTacoToOrder(taco, orderId);
+  }
+
+  return order;
+}
+
+private long saveOrderDetails(Order order) {
+  @SuppressWarnings("unchecked")
+  Map<String, Object> values =
+      objectMapper.convertValue(order, Map.class);
+  values.put("placedAt", order.getCreatedAt());
+
+  long orderId =
+      orderInserter
+          .executeAndReturnKey(values)
+          .longValue();
+  return orderId;
+}
+
+private void saveTacoToOrder(Taco taco, long orderId) {
+  Map<String, Object> values = new HashMap<>();
+  values.put("tacoOrder", orderId);
+  values.put("taco", taco.getId());
+  orderTacoInserter.execute(values);
 }
 
 

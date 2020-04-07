@@ -1,6 +1,7 @@
 package com.cloud.taco.POJO;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Pattern;
@@ -38,6 +39,7 @@ public class Order {
   private String ccCVV;
   private long id;
   private Date createdAt;
+  private List<Taco> taco;
 
 }
 
