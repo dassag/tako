@@ -1,6 +1,7 @@
 package com.cloud.taco.POJO;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 import lombok.AccessLevel;
 import lombok.Data;
@@ -20,6 +21,8 @@ import lombok.ToString;
 public class Ingredients {
 
 	private final String name;
+	
+	@Id
 	private final String id;
 	private final Type type;
 	
